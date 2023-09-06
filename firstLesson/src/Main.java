@@ -35,12 +35,12 @@ public class Main {
         short poland = 966;
         System.out.print("Poland was baptized in ");
         System.out.println(poland);
-        int population_then = 2000000000;
+        int populationThen = 2000000000;
         System.out.print("In 1930 world population was counting ");
-        System.out.println(population_then);
-        byte population_now = 8;
+        System.out.println(populationThen);
+        byte populationNow = 8;
         System.out.print("In 2022 world population was counting ");
-        System.out.print(population_now);
+        System.out.print(populationNow);
         System.out.print(" billions!");
         float e = 2.71828f;
         System.out.print("Number 'e' is almost equal to ");
