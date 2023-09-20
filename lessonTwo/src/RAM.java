@@ -1,3 +1,7 @@
 public class RAM {
-    int amountOfRam;
+    long amountOfRamInMB;
+
+    public RAM(long amountOfRamInMB) {
+        this.amountOfRamInMB = amountOfRamInMB;
+    }
 }

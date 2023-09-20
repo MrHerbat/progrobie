@@ -1,25 +1,27 @@
-public class Main {
-    public static void main(String[] args) {
-        Screen inRoom1 = new Screen();
-        Screen inRoom2 = new Screen();
-        Screen inRoom3 = new Screen();
-        Screen inRoom4 = new Screen();
-        Screen inRoom5 = new Screen();
-        Screen inRoom6 = new Screen();
-        Screen inRoom7 = new Screen();
-        Screen inRoom8 = new Screen();
-        Screen inRoom9 = new Screen();
-        Screen inRoom10 = new Screen();
-        Screen inRoom11 = new Screen();
-        Screen inRoom12 = new Screen();
-        Screen inRoom13 = new Screen();
-        Screen inRoom14 = new Screen();
-        Screen inRoom15 = new Screen();
-        Screen inRoom16 = new Screen();
-        Screen inRoom17 = new Screen();
-        Screen inRoom18 = new Screen();
-        Screen inRoom19 = new Screen();
-        Screen inRoom20 = new Screen();
+public class Main
+{
+    public static void main(String[] args)
+    {
+//        Screen inRoom1 = new Screen();
+//        Screen inRoom2 = new Screen();
+//        Screen inRoom3 = new Screen();
+//        Screen inRoom4 = new Screen();
+//        Screen inRoom5 = new Screen();
+//        Screen inRoom6 = new Screen();
+//        Screen inRoom7 = new Screen();
+//        Screen inRoom8 = new Screen();
+//        Screen inRoom9 = new Screen();
+//        Screen inRoom10 = new Screen();
+//        Screen inRoom11 = new Screen();
+//        Screen inRoom12 = new Screen();
+//        Screen inRoom13 = new Screen();
+//        Screen inRoom14 = new Screen();
+//        Screen inRoom15 = new Screen();
+//        Screen inRoom16 = new Screen();
+//        Screen inRoom17 = new Screen();
+//        Screen inRoom18 = new Screen();
+//        Screen inRoom19 = new Screen();
+//        Screen inRoom20 = new Screen();
 
         Mouse inRoomMouse1 = new Mouse();
         Mouse inRoomMouse2 = new Mouse();
@@ -76,43 +78,14 @@ public class Main {
         String name = "Santa Claus";
 
 
-        Keyboard keyboard1 = new Keyboard();
-        keyboard1.hasNumPad = true;
-        keyboard1.isWireless = true;
-        keyboard1.keyboardType = "Membrane";
-        keyboard1.layout = "QWERTY";
-        Keyboard keyboard2 = new Keyboard();
-        keyboard2.hasNumPad = false;
-        keyboard2.isWireless = false;
-        keyboard2.keyboardType = "Membrane";
-        keyboard2.layout = "QWERTY";
-        Keyboard keyboard3 = new Keyboard();
-        keyboard3.hasNumPad = false;
-        keyboard3.isWireless = true;
-        keyboard3.keyboardType = "Mechanical";
-        keyboard3.layout = "QWERTZ";
-
-        System.out.println("has NumPad?    |    what keyboard layout?      |     is wireless?      |   keyboard type");
-        System.out.println(keyboard1.hasNumPad + "           |             " + keyboard1.layout + "            |     " + keyboard1.isWireless + "              |     " + keyboard1.keyboardType);
-        System.out.println(keyboard2.hasNumPad + "          |             " + keyboard2.layout + "            |     " + keyboard2.isWireless + "             |     " + keyboard2.keyboardType);
-        System.out.println(keyboard3.hasNumPad + "          |             " + keyboard3.layout + "            |     " + keyboard3.isWireless + "              |     " + keyboard3.keyboardType);
+        Computer computer1 = new Computer("Intel i5-11320f", "GeForce GT 1050Ti", "Gigabyte", 2000, "HDD", false, 8192l);
+        Computer computer2 = new Computer("Intel i3-10100f", "Intel HD Graphics", "Asus", 1000, "HDD", true, 4096l);
+        Computer computer3 = new Computer("Intel i9-11320f", "GeForce RTX 3060", "Gigabyte", 4000, "SSD", false, 16384l);
 
 
-        Screen screen1 = new Screen();
-        screen1.brand = "HP";
-        screen1.displayType = "LCD";
-        screen1.refreshSpeed = 120;
-        screen1.size = 27;
-        Screen screen2 = new Screen();
-        screen2.brand = "Sony";
-        screen2.displayType = "OLED";
-        screen2.refreshSpeed = 120;
-        screen2.size = 29;
-        Screen screen3 = new Screen();
-        screen3.brand = "Acer";
-        screen3.displayType = "AMOLED";
-        screen3.refreshSpeed = 120;
-        screen3.size = 27;
+        Screen screen1 = new Screen(120, 27, "HP", "OLED");
+        Screen screen2 = new Screen(90, 30, "Sony", "AMOLED");
+        Screen screen3 = new Screen(120, 27, "Acer", "QLED");
         
     }
 
