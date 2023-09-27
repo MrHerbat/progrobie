@@ -3,7 +3,8 @@ public class Weapon
         String weaponName;
         int weaponType;
         String weaponRarity;
-        float weaponDamage;
+        int maxWeaponDamage;
+        int minWeaponDamage;
         int weaponDamageType;
         boolean isTwoHanded;
         boolean isRanged;
@@ -12,12 +13,13 @@ public class Weapon
         int timeToUse;
         int weaponValue;
 
-    public Weapon(String weaponName, int weaponType, String weaponRarity, float weaponDamage, int weaponDamageType, boolean isTwoHanded, int range, int timeToUse, int weaponValue)
+    public Weapon(String weaponName, int weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, int weaponDamageType, boolean isTwoHanded, int range, int timeToUse, int weaponValue)
     {
         this.weaponName = weaponName;
         this.weaponType = weaponType;
         this.weaponRarity = weaponRarity;
-        this.weaponDamage = weaponDamage;
+        this.maxWeaponDamage = maxWeaponDamage;
+        this.minWeaponDamage = minWeaponDamage;
         this.weaponDamageType = weaponDamageType;
         this.isTwoHanded = isTwoHanded;
         this.range = range;
@@ -25,13 +27,14 @@ public class Weapon
         this.weaponValue = weaponValue;
     }
 
-    public Weapon(String weaponName, int weaponType, String weaponRarity, float weaponDamage, int weaponDamageType,
+    public Weapon(String weaponName, int weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, int weaponDamageType,
                   boolean isTwoHanded, boolean isRanged, String weaponAmmoType, int range, int timeToUse, int weaponValue)
     {
         this.weaponName = weaponName;
         this.weaponType = weaponType;
         this.weaponRarity = weaponRarity;
-        this.weaponDamage = weaponDamage;
+        this.minWeaponDamage = minWeaponDamage;
+        this.weaponDamageType = weaponDamageType;
         this.weaponDamageType = weaponDamageType;
         this.isTwoHanded = isTwoHanded;
         this.isRanged = isRanged;

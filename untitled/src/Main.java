@@ -21,12 +21,6 @@ public class Main {
                 player.playerClass.dexterity = 1;
                 player.playerClass.intelligence = 1;
                 player.playerClass.speed = 1f;
-                player.lHand.handHitPoints = 1.5f;
-                player.rHand.handHitPoints = 1.5f;
-                player.lLegHitPoints = 1f;
-                player.rLegHitPoints = 1f;
-                player.bodyHitPoints = 3f;
-                player.headHitPoints = 2f;
                 break;
             case(2):
                 player.playerClass.className = "Ranger";
@@ -38,12 +32,6 @@ public class Main {
                 player.playerClass.dexterity = 4;
                 player.playerClass.intelligence = 2;
                 player.playerClass.speed = 2f;
-                player.lHand.handHitPoints = 1f;
-                player.rHand.handHitPoints = 1f;
-                player.lLegHitPoints = 1f;
-                player.rLegHitPoints = 1f;
-                player.bodyHitPoints = 3f;
-                player.headHitPoints = 2f;
                 break;
             case(3):
                 player.playerClass.className = "Wizard";
@@ -55,12 +43,6 @@ public class Main {
                 player.playerClass.dexterity = 2;
                 player.playerClass.intelligence = 4;
                 player.playerClass.speed = 1.5f;
-                player.lHand.handHitPoints = 1f;
-                player.rHand.handHitPoints = 1f;
-                player.lLegHitPoints = 1f;
-                player.rLegHitPoints = 1f;
-                player.bodyHitPoints = 1f;
-                player.headHitPoints = 1f;
                 break;
             case(4):
                 player.playerClass.className = "Rouge";
@@ -72,12 +54,6 @@ public class Main {
                 player.playerClass.dexterity = 4;
                 player.playerClass.intelligence = 1;
                 player.playerClass.speed = 3f;
-                player.lHand.handHitPoints = 1f;
-                player.rHand.handHitPoints = 1f;
-                player.lLegHitPoints = 1f;
-                player.rLegHitPoints = 1f;
-                player.bodyHitPoints = 2f;
-                player.headHitPoints = 2f;
                 break;
         }
     }

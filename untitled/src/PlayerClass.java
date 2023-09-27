@@ -10,8 +10,7 @@ public class PlayerClass
     float hitPoints;
     float maxHitPoints;
 
-    public PlayerClass(String className, int dexterity, int strength, int charisma, int intelligence,
-                       int endurance, float speed, int hitPoints, int maxHitPoints)
+    public PlayerClass()
     {
         this.className = className;
         this.dexterity = dexterity;
