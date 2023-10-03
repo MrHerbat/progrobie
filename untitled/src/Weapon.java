@@ -1,7 +1,7 @@
 public class Weapon
 {
         String weaponName;
-        int weaponType;
+        String weaponType;
         String weaponRarity;
         int maxWeaponDamage;
         int minWeaponDamage;
@@ -13,7 +13,7 @@ public class Weapon
         int timeToUse;
         int weaponValue;
 
-    public Weapon(String weaponName, int weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, int weaponDamageType, boolean isTwoHanded, int range, int timeToUse, int weaponValue)
+    public Weapon(String weaponName, String weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, String weaponDamageType, boolean isTwoHanded, int range, int timeToUse, int weaponValue)
     {
         this.weaponName = weaponName;
         this.weaponType = weaponType;
