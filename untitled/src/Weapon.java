@@ -27,7 +27,7 @@ public class Weapon
         this.weaponValue = weaponValue;
     }
 
-    public Weapon(String weaponName, int weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, int weaponDamageType,
+    public Weapon(String weaponName, String weaponType, String weaponRarity, int maxWeaponDamage, int minWeaponDamage, String weaponDamageType,
                   boolean isTwoHanded, boolean isRanged, String weaponAmmoType, int range, int timeToUse, int weaponValue)
     {
         this.weaponName = weaponName;
