@@ -1,12 +1,16 @@
 public class LeftHand
 {
     Weapon weapon;
+    Armory equippedWeapon;
+
     public LeftHand()
     {
-        Weapon weapon = new Weapon("Fist", 1, "Common", 1f, 1, false, 1, 0, 0);
-    }
-    public void Equip(Weapon weapon)
-    {
         this.weapon = weapon;
+        this.equippedWeapon = equippedWeapon;
+    }
+
+    public void Equip(Armory equippedWeapon)
+    {
+        this.equippedWeapon = equippedWeapon;
     }
 }
