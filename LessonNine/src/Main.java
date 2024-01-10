@@ -11,13 +11,15 @@ public class Main {
 //        smartwatch.przywitajSie();
 //        laptop.przywitajSie();
 
-        Vehicle vehicle = new Vehicle();
-        Car car = new Car();
-        Bus bus = new Bus();
+        Plant plant = new Plant("temperate", false);
+        Tree tree = new Tree("temperate", false, 12, 1.3d);
+        Deciduous deciduous = new Deciduous("temperate", false, 12, 1.3d,"green", true);
 
-        vehicle.parameters();
-        car.parameters();
-        bus.parameters();
+        plant.writeParameters();
+        System.out.println("-------------------");
+        tree.writeParameters();
+        System.out.println("-------------------");
+        deciduous.writeParameters();
 
     }
 }
