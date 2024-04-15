@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements ChangeListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        g.setColor(currentColor);
         g.fillRect(100,150,100,100);
         repaint();
     }
