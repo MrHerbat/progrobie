@@ -11,15 +11,12 @@ import java.awt.event.ActionListener;
 
 public class Panels extends JPanel implements ChangeListener, ActionListener
 {
-
-    public GameStates gameStates;
-
     Player player = new Player();
     JFrame frame;
-    JLayeredPane creator,menu,battle,pause,info;
-    JPanel mainMenu, characterAppearance,characterClass,battleScreen,playerInformation;
+    JLayeredPane creator,menu,battle,pause,info,adventure,map;
+    JPanel buttonArea, titleArea, characterAppearance,characterClass,battleScreen,playerInformation,mapPanel,adventurePanel;
     JSlider rSlider, gSlider, bSlider;
-    JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment;
+    JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment, title;
     JLabel playerIcon;
     private int r,g,b;
     Color currentColor,playerColor;
@@ -29,15 +26,39 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
     public Panels()
     {
-        gameStates = GameStates.MAIN_MENU;
+
 
         //MAIN MENU
-        mainMenu = new JPanel();
-        mainMenu.setLayout(null);
-        mainMenu.setBounds(0,0,900,600);
-        mainMenu.setBackground(Color.darkGray);
+        buttonArea = new JPanel();
+        buttonArea.setBounds(350,200,200,300);
+        buttonArea.setBackground(Color.darkGray);
+
+        titleArea = new JPanel();
+        titleArea.setBounds(200,0,500,50);
+        titleArea.setBackground(Color.darkGray);
+
+        title = new JLabel("<html>HEXAGON Corrupted</html>");
+        title.setFont(new Font("JetBrains Mono",Font.ITALIC,40));
+        title.setForeground(Color.cyan);
+
+        titleArea.add(title);
+
+        playButton = new JButton("Play");
+        playButton.setPreferredSize(new Dimension(150,75));
+        playButton.addActionListener(this);
+
+        exitButton = new JButton("Exit");
+        exitButton.setPreferredSize(new Dimension(150,75));
+        exitButton.addActionListener(this);
 
 
+        buttonArea.add(playButton);
+        buttonArea.add(exitButton);
+
+        menu = new JLayeredPane();
+        menu.setBounds(0,0,900,600);
+        menu.add(buttonArea);
+        menu.add(titleArea);
 
 
         //CHARACTER CLASSES
@@ -148,9 +169,9 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         frame = new JFrame();
         frame.add(creator);
         frame.add(menu);
-        frame.add(info);
-        frame.add(pause);
-        frame.add(battle);
+//        frame.add(info);
+//        frame.add(pause);
+//        frame.add(battle);
         frame.setSize(900,600);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,20 +181,27 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        while(gameStates==GameStates.CREATOR)
-        {
             r = rSlider.getValue();
             g = gSlider.getValue();
             b = bSlider.getValue();
             currentColor = new Color(r,g,b);
             rgbValue.setText("R: "+r+"| G: "+g+"| B: "+b);
             playerIcon.setBackground(currentColor);
-        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        if(e.getSource() == playButton)
+        {
+            menu.setVisible(false);
+            creator.setVisible(true);
+        }
+        if(e.getSource() == exitButton)
+        {
+            System.exit(0);
+        }
+
         if(e.getSource() == mage)
         {
             classDesc.setText("<html>Mage is medium range class that fights using magic. It's very weak, but his spells does the job done dealing area damage or single opponent damage!</html>");
@@ -233,6 +261,6 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         player.setEquipment();
         player.updateStats();
         classEquipment.setText(player.returnEquipment());
-        classInfo.setText((player.battleToString()));
+        classInfo.setText((player.creatorToString()));
     }
 }
