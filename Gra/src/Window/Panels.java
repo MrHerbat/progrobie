@@ -16,7 +16,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
     Player player = new Player();
     JFrame frame;
-    JLayeredPane layeredPane;
+    JLayeredPane creator,menu,battle,pause,info;
     JPanel mainMenu, characterAppearance,characterClass,battleScreen,playerInformation;
     JSlider rSlider, gSlider, bSlider;
     JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment;
@@ -29,6 +29,8 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
     public Panels()
     {
+        gameStates = GameStates.MAIN_MENU;
+
         //MAIN MENU
         mainMenu = new JPanel();
         mainMenu.setLayout(null);
@@ -122,10 +124,9 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
         rgbValue.setText("R: "+r+"| G: "+g+"| B: "+b);
 
-
         characterAppearance = new JPanel();
         characterAppearance.setBounds(450,0,450,600);
-        characterAppearance.setBackground(Color.red);
+        characterAppearance.setBackground(Color.lightGray);
         characterAppearance.add(look);
         characterAppearance.add(rSlider);
         characterAppearance.add(gSlider);
@@ -136,16 +137,20 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         characterAppearance.add(finishPlayer);
 
 
-        layeredPane = new JLayeredPane();
-        layeredPane.setBounds(0,0,900,600);
-        layeredPane.add(characterAppearance,2);
-        layeredPane.add(characterClass, 1);
-        layeredPane.add(playerIcon,1);
-        layeredPane.add(mainMenu,0);
+        creator = new JLayeredPane();
+        creator.setBounds(0,0,900,600);
+        creator.add(characterAppearance);
+        creator.add(characterClass);
+        creator.add(playerIcon);
+        creator.setVisible(false);
 
 
         frame = new JFrame();
-        frame.add(layeredPane);
+        frame.add(creator);
+        frame.add(menu);
+        frame.add(info);
+        frame.add(pause);
+        frame.add(battle);
         frame.setSize(900,600);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,13 +211,6 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
                 player.name = textField.getText();
             }
         }
-
-        switch (gameStates)
-        {
-            case MAIN_MENU:
-
-        }
-
     }
 
 
