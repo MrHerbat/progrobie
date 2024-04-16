@@ -11,33 +11,47 @@ import java.awt.event.ActionListener;
 
 public class Panels extends JPanel implements ChangeListener, ActionListener
 {
+
+    public GameStates gameStates;
+
     Player player = new Player();
     JFrame frame;
     JLayeredPane layeredPane;
     JPanel mainMenu, characterAppearance,characterClass,battleScreen,playerInformation;
     JSlider rSlider, gSlider, bSlider;
-    JLabel rgbValue, classes, look,name, classInfo, classEquipment;
+    JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment;
     JLabel playerIcon;
     private int r,g,b;
     Color currentColor,playerColor;
     JTextField textField;
-    JButton finishPlayer;
+    JButton finishPlayer, playButton, exitButton;
     JRadioButton mage,rouge,warrior,ranger;
 
     public Panels()
     {
-        currentColor = Color.BLACK;
+        //MAIN MENU
+        mainMenu = new JPanel();
+        mainMenu.setLayout(null);
+        mainMenu.setBounds(0,0,900,600);
+        mainMenu.setBackground(Color.darkGray);
+
+
+
+
         //CHARACTER CLASSES
         classes = new JLabel("Classes:");
         classes.setFont(new Font("JetBrains Mono",Font.BOLD,20));
         classes.setPreferredSize(new Dimension(400,20));
 
-        classInfo = new JLabel("");
-        classInfo.setFont(new Font("JetBrains Mono",Font.BOLD,13));
-        classInfo.setPreferredSize(new Dimension(400,60));
+        classDesc = new JLabel("");
+        classDesc.setFont(new Font("JetBrains Mono",Font.BOLD,13));
+        classDesc.setPreferredSize(new Dimension(400,80));
         classEquipment = new JLabel("");
         classEquipment.setFont(new Font("JetBrains Mono",Font.BOLD,13));
-        classEquipment.setPreferredSize(new Dimension(400,60));
+        classEquipment.setPreferredSize(new Dimension(200,60));
+        classInfo = new JLabel("");
+        classInfo.setFont(new Font("JetBrains Mono",Font.BOLD,13));
+        classInfo.setPreferredSize(new Dimension(200,60));
 
         characterClass = new JPanel();
         characterClass.setBounds(0,300,450,300);
@@ -63,11 +77,13 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         characterClass.add(rouge);
         characterClass.add(warrior);
         characterClass.add(ranger);
-        characterClass.add(classInfo);
+        characterClass.add(classDesc);
         characterClass.add(classEquipment);
+        characterClass.add(classInfo);
 
 
         //CHARACTER CREATOR
+        currentColor = Color.BLACK;
         playerIcon = new JLabel();
         playerIcon.setBounds(50,50,100,100);
         playerIcon.setBackground(currentColor);
@@ -122,9 +138,10 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,900,600);
-        layeredPane.add(characterAppearance,0);
-        layeredPane.add(characterClass, 0);
+        layeredPane.add(characterAppearance,2);
+        layeredPane.add(characterClass, 1);
         layeredPane.add(playerIcon,1);
+        layeredPane.add(mainMenu,0);
 
 
         frame = new JFrame();
@@ -138,50 +155,86 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        r = rSlider.getValue();
-        g = gSlider.getValue();
-        b = bSlider.getValue();
-        currentColor = new Color(r,g,b);
-        rgbValue.setText("R: "+r+"| G: "+g+"| B: "+b);
-        playerIcon.setBackground(currentColor);
+        while(gameStates==GameStates.CREATOR)
+        {
+            r = rSlider.getValue();
+            g = gSlider.getValue();
+            b = bSlider.getValue();
+            currentColor = new Color(r,g,b);
+            rgbValue.setText("R: "+r+"| G: "+g+"| B: "+b);
+            playerIcon.setBackground(currentColor);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == finishPlayer)
-        {
-            System.out.println(textField.getText());
-        }
-
         if(e.getSource() == mage)
         {
-            player.classChoice = 1;
-            player.setEquipment();
-            classInfo.setText("<html>Mage is medium range class that fights using magic. It's very weak, but his spells does the job done dealing area damage or single opponent damage!</html>");
-            classEquipment.setText(player.returnEquipment());
+            classDesc.setText("<html>Mage is medium range class that fights using magic. It's very weak, but his spells does the job done dealing area damage or single opponent damage!</html>");
+            setPlayerInfo(player,1);
         }
         else if(e.getSource() == ranger)
         {
-            player.classChoice = 2;
-            player.setEquipment();
-            classInfo.setText("<html>Ranger is long range class that fights with his bow and dagger. His long distance makes him perfect for one enemy and his spells can make for more opponents!</html>");
-            classEquipment.setText(player.returnEquipment());
+            classDesc.setText("<html>Ranger is long range class that fights with his bow and dagger. His long distance makes him perfect for one enemy and his spells can make for more opponents!</html>");
+            setPlayerInfo(player,2);
         }
         else if(e.getSource() == rouge)
         {
-            player.classChoice = 3;
-            player.setEquipment();
-            classInfo.setText("<html>Rouge is stealthy character that fights in close range. He can attack twice during his action because of his two weapons. Perfect for quick fights and two enemies!</html>");
-            classEquipment.setText(player.returnEquipment());
+            classDesc.setText("<html>Rouge is stealthy character that fights in close range. He can attack twice during his action because of his two weapons. Perfect for quick fights and two enemies!</html>");
+            setPlayerInfo(player,3);
         }
 
         else if(e.getSource() == warrior)
         {
-            player.classChoice = 4;
-            player.setEquipment();
-            classInfo.setText("<html>Warrior is short range character that can handle more than only few hits and deal big damage using shield and sword. He is perfect for longer fights and handling many enemies!</html>");
-            classEquipment.setText(player.returnEquipment());
+            classDesc.setText("<html>Warrior is short range character that can handle more than only few hits and deal big damage using shield and sword. He is perfect for longer fights and handling many enemies!</html>");
+            setPlayerInfo(player,4);
         }
+        if(e.getSource() == finishPlayer)
+        {
+            if(!isLetters(textField.getText()) || textField.getText().isEmpty())
+            {
+                System.out.println("Your name should only include letters and be at least 1 letter long");
+            }
+            if(player.classChoice==0)
+            {
+                System.out.println("Please, select a class");
+            }
+            if(player.classChoice!=0 && isLetters(textField.getText()) && !textField.getText().isEmpty())
+            {
+                System.out.println(textField.getText());
+                player.name = textField.getText();
+            }
+        }
+
+        switch (gameStates)
+        {
+            case MAIN_MENU:
+
+        }
+
+    }
+
+
+
+    public boolean isLetters(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void setPlayerInfo(Player player, int choice)
+    {
+        player.classChoice = choice;
+        player.setEquipment();
+        player.updateStats();
+        classEquipment.setText(player.returnEquipment());
+        classInfo.setText((player.battleToString()));
     }
 }
