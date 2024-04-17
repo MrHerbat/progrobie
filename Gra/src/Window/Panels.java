@@ -11,22 +11,31 @@ import java.awt.event.ActionListener;
 
 public class Panels extends JPanel implements ChangeListener, ActionListener
 {
+    Combat combat;
     Player player = new Player();
     JFrame frame;
-    JLayeredPane creator,menu,battle,pause,info,adventure,map;
-    JPanel buttonArea, titleArea, characterAppearance,characterClass,battleScreen,playerInformation,mapPanel,adventurePanel;
+    JLayeredPane creator,menu,battle,adventure,map;
+    JPanel buttonArea, titleArea, characterAppearance,characterClass,battleScreen,battleOptions,playerInformation,mapPanel,adventurePanel;
     JSlider rSlider, gSlider, bSlider;
-    JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment, title;
+    JLabel rgbValue, classes, look,name, classDesc,classInfo, classEquipment, title,enemyName, playerName,combatAction, playerInfo,playerInfo2, playerContainer;
     JLabel playerIcon;
-    private int r,g,b;
+    private int r,g,b, playerPosX = 75,playerPosY = 75;
     Color currentColor,playerColor;
     JTextField textField;
-    JButton finishPlayer, playButton, exitButton;
+    JButton finishPlayer, playButton, exitButton,fight,showInfo,back,attack,spells,stepBack,stepFor,escape;
     JRadioButton mage,rouge,warrior,ranger;
 
     public Panels()
     {
+        combat = new Combat();
 
+        //PLAYER ICON
+        currentColor = Color.BLACK;
+        playerIcon = new JLabel();
+        playerIcon.setBounds(playerPosX,playerPosY,100,100);
+        playerIcon.setBackground(currentColor);
+        playerIcon.setOpaque(true);
+        playerIcon.setVisible(false);
 
         //MAIN MENU
         buttonArea = new JPanel();
@@ -37,7 +46,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         titleArea.setBounds(200,0,500,50);
         titleArea.setBackground(Color.darkGray);
 
-        title = new JLabel("<html>HEXAGON Corrupted</html>");
+        title = new JLabel("<html>Gra o kwadracie</html>");
         title.setFont(new Font("JetBrains Mono",Font.ITALIC,40));
         title.setForeground(Color.cyan);
 
@@ -59,6 +68,92 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         menu.setBounds(0,0,900,600);
         menu.add(buttonArea);
         menu.add(titleArea);
+
+
+        //ADVENTURE MENU
+        fight = new JButton("Go Fight");
+        fight.setPreferredSize(new Dimension(100,50));
+        fight.addActionListener(this);
+
+        showInfo = new JButton("Player");
+        showInfo.setPreferredSize(new Dimension(100,100));
+        showInfo.addActionListener(this);
+
+        back = new JButton("Back");
+        back.setPreferredSize(new Dimension(100,50));
+        back.addActionListener(this);
+
+        adventurePanel = new JPanel();
+        adventurePanel.setBounds(300,0,600,600);
+        adventurePanel.add(fight);
+        adventurePanel.add(showInfo);
+
+        playerContainer = new JLabel("");
+        playerContainer.setPreferredSize(new Dimension(300,100));
+
+        playerInfo = new JLabel("");
+        playerInfo.setPreferredSize(new Dimension(300,300));
+        playerInfo.setForeground(Color.white);
+
+
+        playerInformation = new JPanel();
+        playerInformation.setBounds(0,0,300,600);
+        playerInformation.add(playerContainer);
+        playerInformation.add(playerInfo);
+        playerInformation.add(back);
+        playerInformation.setBackground(Color.DARK_GRAY);
+        playerInformation.setVisible(false);
+
+
+        adventure = new JLayeredPane();
+        adventure.setBounds(300,0,600,600);
+        adventure.add(adventurePanel);
+        adventure.add(playerInformation);
+        adventure.setVisible(false);
+
+
+        //BATTLE MENU
+        attack = new JButton("Attack");
+        attack.setPreferredSize(new Dimension(100,50));
+        attack.addActionListener(combat);
+
+        spells = new JButton("Spells (wip)");
+        spells.setPreferredSize(new Dimension(100,50));
+        spells.addActionListener(combat);
+        spells.setEnabled(false);
+
+        stepFor = new JButton("Step Forward");
+        stepFor.setPreferredSize(new Dimension(100,50));
+        stepFor.addActionListener(combat);
+
+        stepBack = new JButton("Step Back");
+        stepBack.setPreferredSize(new Dimension(100,50));
+        stepBack.addActionListener(combat);
+        stepBack.setEnabled(false);
+
+        escape = new JButton("Escape");
+        escape.setPreferredSize(new Dimension(100,50));
+        escape.addActionListener(combat);
+
+        battleScreen = new JPanel();
+        battleScreen.setBounds(0,0,900,400);
+        battleScreen.setBackground(Color.lightGray);
+
+
+        battleOptions = new JPanel();
+        battleOptions.setBounds(0,400,900,200);
+        battleOptions.setBackground(Color.gray);
+        battleOptions.add(attack);
+        battleOptions.add(spells);
+        battleOptions.add(stepFor);
+        battleOptions.add(stepBack);
+        battleOptions.add(escape);
+
+
+        battle = new JLayeredPane();
+        battle.setBounds(0,0,900,600);
+        battle.add(battleOptions);
+        battle.add(battleScreen);
 
 
         //CHARACTER CLASSES
@@ -106,13 +201,6 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
 
 
         //CHARACTER CREATOR
-        currentColor = Color.BLACK;
-        playerIcon = new JLabel();
-        playerIcon.setBounds(50,50,100,100);
-        playerIcon.setBackground(currentColor);
-        playerIcon.setOpaque(true);
-
-
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(200,50));
         textField.setFont(new Font("Arial",Font.PLAIN,20));
@@ -162,13 +250,16 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         creator.setBounds(0,0,900,600);
         creator.add(characterAppearance);
         creator.add(characterClass);
-        creator.add(playerIcon);
         creator.setVisible(false);
 
 
+
+
         frame = new JFrame();
+        frame.add(playerIcon);
         frame.add(creator);
         frame.add(menu);
+        frame.add(adventure);
 //        frame.add(info);
 //        frame.add(pause);
 //        frame.add(battle);
@@ -196,6 +287,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         {
             menu.setVisible(false);
             creator.setVisible(true);
+            playerIcon.setVisible(true);
         }
         if(e.getSource() == exitButton)
         {
@@ -235,9 +327,28 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
             }
             if(player.classChoice!=0 && isLetters(textField.getText()) && !textField.getText().isEmpty())
             {
+                playerColor = currentColor;
+                playerIcon.setBackground(playerColor);
                 System.out.println(textField.getText());
                 player.name = textField.getText();
+                creator.setVisible(false);
+                adventure.setVisible(true);
+                playerIcon.setVisible(false);
+                playerInfo.setText("<html>"+player.toString()+"<br>"+player.returnEquipment());
             }
+        }
+        if(e.getSource() == showInfo)
+        {
+            playerPosX = 100;
+            playerPosY = 50;
+            playerIcon.setBounds(playerPosX,playerPosY,100,100);
+            playerInformation.setVisible(true);
+            playerIcon.setVisible(true);
+        }
+        if(e.getSource() == back)
+        {
+            playerInformation.setVisible(false);
+            playerIcon.setVisible(false);
         }
     }
 
@@ -251,7 +362,6 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
                 return false;
             }
         }
-
         return true;
     }
 

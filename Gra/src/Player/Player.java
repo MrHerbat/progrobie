@@ -37,17 +37,18 @@ public class Player
     @Override
     public String toString()
     {
-        return name+"\n"+"Level: "+this.currentLevel+"\nRace: "+this.playerRace+"\nClass: "+this.playerClass[classChoice]+"\nHP: "+this.currentHp+"/"+this.maxHp+"\nMP: "+this.currentMp+"/"+this.maxMp;
+        return "<html>"+name+"<br>Level: "+this.currentLevel+"<br>Race: "+this.playerRace+"<br>Class: "+this.playerClass[classChoice]+"<br>HP: "+this.currentHp+"/"+this.maxHp+"<br>MP: "+this.currentMp+"/"+this.maxMp+"<html>";
     }
     public String battleToString()
     {
         return name+"\n"+"Level: "+this.currentLevel+"\nHP: "+this.currentHp+"/"+this.maxHp+"\nMP: "+this.currentMp+"/"+this.maxMp;
     }
+    public String creatorToString()
+    {
+        return "<html>HP: "+this.maxHp+"<br>MP: "+this.maxMp+"<html>";
+    }
     public void updateStats()
     {
-        hpModifier = currentLevel.getHpModifier();
-        profModifier = currentLevel.getProfModifier();
-        thingyModifier = currentLevel.getThingyModifier();
         maxHp = playerClass[classChoice].getHitPoints()*hpModifier;
         currentHp = maxHp;
         maxMp = playerClass[classChoice].getManaPoints()*thingyModifier;

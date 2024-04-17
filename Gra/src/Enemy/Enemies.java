@@ -2,10 +2,10 @@ package Enemy;
 
 public enum Enemies
 {
-    GLUE_SLIME(15,2,8,3,10,15,45,3,6),
+    GLUE_SLIME(15,2,8,3,10,35,65,3,6),
     W0LF3$(10,3,9,2,12,30,90,5,1),
-    MISSING_NO(20,3,5,8,35,50,150,3,2),
-    B1RD(5,4,6,0,5,20,60,1,2);
+    MISSING_NO(20,3,5,8,35,90,150,3,2),
+    B1RD(5,4,6,0,5,40,80,1,2);
 
     private int speed, minAtk,maxAtk, def, hp, minExp, maxExp, pen, range;
 

@@ -5,10 +5,10 @@ public enum Classes
     //hitDice,atk proficiency, armor proficiency, weapon proficiency,mana/rage/shadow dice
 
     EMPTY(0,0,"","",""),
-    MAGE(14,40,"robes","wands","magic"),
-    RANGER(25,20,"medium","ranged","ranged"),
-    ROGUE(20,"light","finesse","melee"),
-    FIGHTER(30,"heavy","long","melee");
+    MAGE(18,40,"robes","wands","magic"),
+    RANGER(28,20,"medium","ranged","ranged"),
+    ROGUE(22,"light","finesse","melee"),
+    FIGHTER(32,"heavy","long","melee");
 
     private int hitPoints, manaPoints, ragePoints;
     public String armorProficiency, weaponProficiency, atkProficiency;
