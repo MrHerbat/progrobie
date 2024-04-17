@@ -19,6 +19,7 @@ public class Player
     private int maxMp = playerClass[classChoice].getManaPoints()*thingyModifier;
     private int currentMp = maxMp;
     private int speed = 10;
+    public int ac;
     public String name;
     public Equipment equipment = new Equipment();
 
@@ -37,7 +38,7 @@ public class Player
     @Override
     public String toString()
     {
-        return "<html>"+name+"<br>Level: "+this.currentLevel+"<br>Race: "+this.playerRace+"<br>Class: "+this.playerClass[classChoice]+"<br>HP: "+this.currentHp+"/"+this.maxHp+"<br>MP: "+this.currentMp+"/"+this.maxMp+"<html>";
+        return "<html>Name: "+name+"<br>Level: "+this.currentLevel+"<br>Race: "+this.playerRace+"<br>Class: "+this.playerClass[classChoice]+"<br>HP: "+this.currentHp+"/"+this.maxHp+"<br>MP: "+this.currentMp+"/"+this.maxMp+"</html>";
     }
     public String battleToString()
     {
@@ -53,6 +54,11 @@ public class Player
         currentHp = maxHp;
         maxMp = playerClass[classChoice].getManaPoints()*thingyModifier;
         currentMp = maxMp;
+        ac = equipment.armor.getDef();
+        if(equipment.armorsOffHand!=null)
+        {
+            ac += equipment.armorsOffHand.getDef();
+        }
     }
 
     public void levelUp() {
@@ -113,11 +119,11 @@ public class Player
     {
         if(equipment.weaponOffHand==null)
         {
-            return "<html>Armor:"+equipment.armor+"<br>Main hand: "+ equipment.mainHand+"<br>Off Hand: "+equipment.armorsOffHand+"</html>";
+            return "<html>Armor:"+equipment.armor+"<br>Main hand: "+ equipment.mainHand+"<br>Off Hand: "+equipment.armorsOffHand+"<br>Armor Class: "+ac+"</html>";
         }
         else
         {
-            return "<html>Armor:"+equipment.armor+"<br>Main hand: "+ equipment.mainHand+"<br>Off Hand: "+equipment.weaponOffHand+"</html>";
+            return "<html>Armor:"+equipment.armor+"<br>Main hand: "+ equipment.mainHand+"<br>Off Hand: "+equipment.weaponOffHand+"<br>Armor Class: "+ac+"</html>";
         }
     }
     public int getDmg()

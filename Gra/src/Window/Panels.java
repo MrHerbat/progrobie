@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 public class Panels extends JPanel implements ChangeListener, ActionListener
 {
+    private boolean adv;
     Combat combat;
     Player player = new Player();
     JFrame frame;
@@ -22,7 +23,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
     private int r,g,b, playerPosX = 75,playerPosY = 75;
     Color currentColor,playerColor;
     JTextField textField;
-    JButton finishPlayer, playButton, exitButton,fight,showInfo,back,attack,spells,stepBack,stepFor,escape;
+    JButton finishPlayer, playButton, exitButton,fight,showInfo,back,checkOther,attack,spells,stepBack,stepFor,escape;
     JRadioButton mage,rouge,warrior,ranger;
 
     public Panels()
@@ -82,6 +83,9 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         back = new JButton("Back");
         back.setPreferredSize(new Dimension(100,50));
         back.addActionListener(this);
+        checkOther = new JButton("Check Equipment");
+        checkOther.setPreferredSize(new Dimension(150,50));
+        checkOther.addActionListener(this);
 
         adventurePanel = new JPanel();
         adventurePanel.setBounds(300,0,600,600);
@@ -101,6 +105,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         playerInformation.add(playerContainer);
         playerInformation.add(playerInfo);
         playerInformation.add(back);
+        playerInformation.add(checkOther);
         playerInformation.setBackground(Color.DARK_GRAY);
         playerInformation.setVisible(false);
 
@@ -166,7 +171,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         classDesc.setPreferredSize(new Dimension(400,80));
         classEquipment = new JLabel("");
         classEquipment.setFont(new Font("JetBrains Mono",Font.BOLD,13));
-        classEquipment.setPreferredSize(new Dimension(200,60));
+        classEquipment.setPreferredSize(new Dimension(200,80));
         classInfo = new JLabel("");
         classInfo.setFont(new Font("JetBrains Mono",Font.BOLD,13));
         classInfo.setPreferredSize(new Dimension(200,60));
@@ -268,6 +273,12 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        if(adv)
+        {
+            player.updateStats();
+            adv = false;
+        }
     }
 
     @Override
@@ -334,7 +345,8 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
                 creator.setVisible(false);
                 adventure.setVisible(true);
                 playerIcon.setVisible(false);
-                playerInfo.setText("<html>"+player.toString()+"<br>"+player.returnEquipment());
+                playerInfo.setText(player.toString());
+                adv = true;
             }
         }
         if(e.getSource() == showInfo)
@@ -344,6 +356,7 @@ public class Panels extends JPanel implements ChangeListener, ActionListener
             playerIcon.setBounds(playerPosX,playerPosY,100,100);
             playerInformation.setVisible(true);
             playerIcon.setVisible(true);
+            playerInfo.setText(player.toString()+player.returnEquipment());
         }
         if(e.getSource() == back)
         {

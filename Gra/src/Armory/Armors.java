@@ -2,11 +2,11 @@ package Armory;
 
 public enum Armors
 {
-   BROKEN_SHIELD(3,1,"heavy",Rarity.OLD),
-   FADED_ROBES(2,4,"robes",Rarity.OLD),
-   SHADY_CLOAK(3,3,"light",Rarity.OLD),
-    LEATHER_JACKET(4,2,"medium",Rarity.OLD),
-    RUSTY_CHAINMAIL(5,1,"heavy",Rarity.OLD);
+   BROKEN_SHIELD(1,1,"heavy",Rarity.OLD),
+   FADED_ROBES(3,4,"robes",Rarity.OLD),
+   SHADY_CLOAK(4,3,"light",Rarity.OLD),
+    LEATHER_JACKET(5,2,"medium",Rarity.OLD),
+    RUSTY_CHAINMAIL(6,1,"heavy",Rarity.OLD);
 
 
     private int def;
