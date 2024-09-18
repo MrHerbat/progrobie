@@ -60,20 +60,20 @@ public class Main {
 //        }
 
 
-        ArrayList<Bullet> ammunitionMagazine = new ArrayList<>(100000);
-
-        Bullet bullet = new Bullet(7.62d,154,38.7d,"boat tail","spear tip","coppr/steel");
-
-        for (int i = 0; i < 100000; i++) {
-            if(ammunitionMagazine.isEmpty())
-            {
-                for (int j = 0; j < 100000; j++) {
-                    ammunitionMagazine.add(bullet);
-                }
-            } else{
-                ammunitionMagazine.clear();
-            }
-
-        }
+//        ArrayList<Bullet> ammunitionMagazine = new ArrayList<>(100000);
+//
+//        Bullet bullet = new Bullet(7.62d,154,38.7d,"boat tail","spear tip","coppr/steel");
+//
+//        for (int i = 0; i < 100000; i++) {
+//            if(ammunitionMagazine.isEmpty())
+//            {
+//                for (int j = 0; j < 100000; j++) {
+//                    ammunitionMagazine.add(bullet);
+//                }
+//            } else{
+//                ammunitionMagazine.clear();
+//            }
+//
+//        }
     }
 }
