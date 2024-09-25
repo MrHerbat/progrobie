@@ -23,5 +23,16 @@ public class Main {
         duck2.howIFly();
         duck3.howIFly();
         duck4.howIFly();
+
+        Missile missile1 = new Missile();
+        Missile missile2 = new Missile();
+        Missile missile3 = new Missile();
+        Missile missile4 = new Missile();
+        Missile missile5 = new Missile();
+        missile1.generateShrapnel(3);
+        missile2.generateShrapnel(5);
+        missile3.generateShrapnel(7);
+        missile4.generateShrapnel(2);
+        missile5.generateShrapnel(9);
     }
 }
