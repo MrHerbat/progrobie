@@ -8,5 +8,20 @@ public class Main {
         System.out.println(patient1.leftKidney.price);
         System.out.println(patient1.rightKidney.price);
         System.out.println(patient1.liver.price);
+
+        Duck duck1 = new Duck("Hyzio");
+        Duck duck2 = new Duck("Dyzio");
+        Duck duck3 = new Duck("Zyzio");
+        Duck duck4 = new Duck("Diodak"){
+            void howIFly()
+            {
+                System.out.println("I can fly like a swan");
+            }
+        };
+
+        duck1.howIFly();
+        duck2.howIFly();
+        duck3.howIFly();
+        duck4.howIFly();
     }
 }
