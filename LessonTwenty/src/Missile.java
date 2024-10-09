@@ -22,29 +22,23 @@ public class Missile
             this.x = rand.nextInt(10+10)-10;
             this.y = rand.nextInt(10+10)-10;
             this.z = rand.nextInt(10+10)-10;
-
         }
-
-        class subFragment extends Shrapnel
-        {
-            int subFId;
-            int x,y,z;
-
-            public subFragment(int shrapnelId, int shrapnelAmount, int subFId) {
-                super(shrapnelId, shrapnelAmount);
-                this.x = rand.nextInt(10+10)-10;
-                this.y = rand.nextInt(10+10)-10;
-                this.z = rand.nextInt(10+10)-10;
-                this.subFId = subFId;
-            }
-
+        public Shrapnel(int shrapnelId) {
+            this.shrapnelId = shrapnelId;
+            this.x = rand.nextInt(10+10)-10;
+            this.y = rand.nextInt(10+10)-10;
+            this.z = rand.nextInt(10+10)-10;
         }
-        void generateSubFragments(int amount)
+        void generateShrapnel(int amount)
         {
             for (int i = 0; i < amount; i++) {
-                subFragment subFragment = new subFragment(shrapnelId,0,i);
-                System.out.println("Shrapnel"+shrapnelId+" - Generated subFragment "+subFragment.subFId+"| hitted coordinates: "+subFragment.x+"x,"+subFragment.y+"y,"+subFragment.z+"z");
-
+                Shrapnel shrapnel = new Shrapnel(i);
+                System.out.println("Shrapnel"+shrapnelId+
+                        " - Generated subfragment "+shrapnel.shrapnelId+
+                        "| hitted coordinates: "+
+                        (shrapnel.x+x)+"x,"+
+                        (shrapnel.y+y)+"y,"+
+                        (shrapnel.z+z)+"z");
             }
         }
 
@@ -54,9 +48,13 @@ public class Missile
     {
         for (int i = 0; i < amount; i++) {
             Shrapnel shrapnel = new Shrapnel(i, rand.nextInt(5)+1);
-            System.out.println("Missile"+missileId+" - Generated shrapnel "+shrapnel.shrapnelId+"| hitted coordinates: "+shrapnel.x+"x,"+shrapnel.y+"y,"+shrapnel.z+"z");
-            shrapnel.generateSubFragments(shrapnel.shrapnelAmount);
-
+            System.out.println("Missile"+missileId+
+                    " - Generated shrapnel "+shrapnel.shrapnelId+
+                    "| hitted coordinates: "+
+                    shrapnel.x+"x,"+
+                    shrapnel.y+"y,"+
+                    shrapnel.z+"z");
+            shrapnel.generateShrapnel(shrapnel.shrapnelAmount);
         }
     }
 }
