@@ -10,7 +10,7 @@ public class Main {
     {
         x=x+1;
     }
-    public static void main(String[] args)
+    public static void main(String[] args)Q
     {
 //        String[] students = new String[14];
 //        students[0] = "Maciek";
