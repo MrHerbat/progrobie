@@ -25,6 +25,6 @@ public class Main {
 //        duck4.howIFly();
 
         Missile missile1 = new Missile(1);
-        missile1.generateShrapnel(2);
+        missile1.generateShrapnel();
     }
 }

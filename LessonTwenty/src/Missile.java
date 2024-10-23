@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Missile
 {
+    ArrayList<Shrapnel> shrapnelList;
     Random rand = new Random();
     int missileId;
 
@@ -11,19 +13,20 @@ public class Missile
 
     class Shrapnel
     {
-        int shrapnelId;
+        ArrayList<Shrapnel> subShrapnelList;
+        String shrapnelId;
         int x,y,z;
         int shrapnelAmount;
 
 
-        public Shrapnel(int shrapnelId, int shrapnelAmount) {
+        public Shrapnel(String shrapnelId, int shrapnelAmount) {
             this.shrapnelId = shrapnelId;
             this.shrapnelAmount = shrapnelAmount;
             this.x = rand.nextInt(10+10)-10;
             this.y = rand.nextInt(10+10)-10;
             this.z = rand.nextInt(10+10)-10;
         }
-        public Shrapnel(int shrapnelId) {
+        public Shrapnel(String shrapnelId) {
             this.shrapnelId = shrapnelId;
             this.x = rand.nextInt(10+10)-10;
             this.y = rand.nextInt(10+10)-10;
@@ -31,30 +34,49 @@ public class Missile
         }
         void generateShrapnel(int amount)
         {
+            subShrapnelList = new ArrayList<>();
             for (int i = 0; i < amount; i++) {
-                Shrapnel shrapnel = new Shrapnel(i);
-                System.out.println("Shrapnel"+shrapnelId+
-                        " - Generated subfragment "+shrapnel.shrapnelId+
-                        "| hitted coordinates: "+
-                        (shrapnel.x+x)+"x,"+
-                        (shrapnel.y+y)+"y,"+
-                        (shrapnel.z+z)+"z");
+                subShrapnelList.add(new Shrapnel((shrapnelId+"sub"+i)));
+                subShrapnelList.get(i).x+=rand.nextInt(10+10)-10;
+                subShrapnelList.get(i).y+=rand.nextInt(10+10)-10;
+                subShrapnelList.get(i).z+=rand.nextInt(10+10)-10;
+                System.out.println(shrapnelId+
+                        " - Generated subfragment "+subShrapnelList.get(i).shrapnelId+
+                        " | hitted coordinates: "+
+                        subShrapnelList.get(i).x+"x,"+
+                        subShrapnelList.get(i).y+"y,"+
+                        subShrapnelList.get(i).z+"z");
             }
         }
 
     }
 
-    void generateShrapnel(int amount)
+    void generateShrapnel()
     {
+        shrapnelList = new ArrayList<>();
+        int amount = 0;
+        amount = rand.nextInt(5)+1;
         for (int i = 0; i < amount; i++) {
-            Shrapnel shrapnel = new Shrapnel(i, rand.nextInt(5)+1);
+            shrapnelList.add(new Shrapnel(("shr"+i), rand.nextInt(5)+1));
             System.out.println("Missile"+missileId+
-                    " - Generated shrapnel "+shrapnel.shrapnelId+
-                    "| hitted coordinates: "+
-                    shrapnel.x+"x,"+
-                    shrapnel.y+"y,"+
-                    shrapnel.z+"z");
-            shrapnel.generateShrapnel(shrapnel.shrapnelAmount);
+                    " - Generated shrapnel "+ shrapnelList.get(i).shrapnelId+
+                    " | hitted coordinates: "+
+                    shrapnelList.get(i).x+"x,"+
+                    shrapnelList.get(i).y+"y,"+
+                    shrapnelList.get(i).z+"z");
+                    shrapnelList.get(i).generateShrapnel(shrapnelList.get(i).shrapnelAmount);
         }
+        checkForShrapnelCollision(shrapnelList);
+    }
+
+
+    void checkForShrapnelCollision(ArrayList<Shrapnel> list)
+    {
+
+
+    }
+    boolean CollisionChecker(Shrapnel s1, Shrapnel s2)
+    {
+        return s1.x==s2.x && s1.y==s2.y && s1.z==s2.z;
     }
 }
