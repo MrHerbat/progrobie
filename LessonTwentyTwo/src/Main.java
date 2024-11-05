@@ -5,6 +5,7 @@ public class Main {
         House dom1 = new House();
         dom1.fillTheHouse();
         System.out.println(dom1.toString());
+        dom1.openAllDoors();
 
         House dom2 = new House();
         dom2.fillTheHouse();

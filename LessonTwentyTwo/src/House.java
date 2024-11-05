@@ -153,5 +153,11 @@ public class House
                 +windows.size()+" room/s \n - "+kitchens.size()+" kitchen/s \n - "
                 +bathrooms.size()+" bathroom/s");
     }
+    public void openAllDoors()
+    {
+        for (int i = 0; i < doors.size(); i++) {
+            doors.get(i).openTheDoor();
+        }
+    }
 
 }
