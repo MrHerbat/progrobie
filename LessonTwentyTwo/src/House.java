@@ -1,8 +1,11 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class House
 {
+    Random rand = new Random();
+
     public class Kitchen
     {
         ArrayList<Door> kitchenDoors = new ArrayList<>();
@@ -128,7 +131,7 @@ public class House
     {
         public void openTheDoor()
         {
-            System.out.println("Door has been opened!");
+            System.out.println("Door has been opened");
         }
     }
     int allDoors;
@@ -178,6 +181,4 @@ public class House
                 +windows.size()+" room/s \n - "+kitchens.size()+" kitchen/s \n - "
                 +bathrooms.size()+" bathroom/s");
     }
-
-
 }
