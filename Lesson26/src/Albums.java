@@ -5,11 +5,17 @@ public class Albums {
     int year;
     long downloadNumber;
 
-    public Albums(String artist, String album, int songsNumber, int year, long downloadNumber) {
-        this.artist = artist;
-        this.album = album;
-        this.songsNumber = songsNumber;
-        this.year = year;
-        this.downloadNumber = downloadNumber;
+    public Albums() {
+    }
+
+    @Override
+    public String toString() {
+        return "Albums{" +
+                "artist='" + artist + '\'' +
+                ", album='" + album + '\'' +
+                ", songsNumber=" + songsNumber +
+                ", year=" + year +
+                ", downloadNumber=" + downloadNumber +
+                '}';
     }
 }

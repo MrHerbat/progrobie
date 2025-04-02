@@ -1,12 +1,10 @@
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static ArrayList<Byte> ChangeArrayToByteArray(ArrayList<Integer> x){
         ArrayList<Byte> b = new ArrayList<Byte>();
@@ -23,32 +21,24 @@ public class Main {
     }
     public static ArrayList<Integer> GetIntArrayFromFile(String filePath) throws IOException {
         ArrayList<Integer> list = new ArrayList<Integer>();
-
-        FileInputStream fileInputStream = new FileInputStream(filePath);
-        BufferedInputStream bfileInputStream = new BufferedInputStream(fileInputStream);
-        Scanner fileScan = new Scanner(bfileInputStream);
-
-        while (fileScan.hasNext()) {
-            list.add(fileScan.nextInt());
-        }
         try {
-            fileInputStream.close();
+            String content = Files.readString(Paths.get(filePath));
+            Arrays.stream(content.trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .forEach(list::add);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Błąd podczas odczytu pliku: " + e.getMessage());
         }
-
         return list;
-
     }
     public static void OutputArrayToFile(String outputFilePath, ArrayList<Byte> byteArrayList) throws IOException{
         FileOutputStream fileOutputStream = new FileOutputStream(outputFilePath);
         for (int i = 0; i < byteArrayList.size(); i++) {
             fileOutputStream.write(byteArrayList.get(i));
 
-            if((i==4 || i>=5) && (i+1)%5==0 && (i+1)%10!=0){
-                fileOutputStream.write((byte)' ');
-            }else if((i+1)>=10 && (i+1)%10==0){
-                fileOutputStream.write((byte)'\n');
+            int position = i + 1;
+            if (position >= 5 && position % 5 == 0) {
+                fileOutputStream.write(position % 10 == 0 ? (byte)'\n' : (byte)' ');
             }
         }
         try {
@@ -59,6 +49,7 @@ public class Main {
     }
     public static void main(String[] args){
         try {
+
             ArrayList<Integer> numbersContainer = GetIntArrayFromFile("input.txt");
             for (int i = 0; i < numbersContainer.size(); i++) {
                 if (i%2==0){
@@ -67,8 +58,28 @@ public class Main {
                     numbersContainer.set(i,numbersContainer.get(i)+2);
                 }
             }
-            Stream<String> album = Files.lines(Path.of("Data.txt"));
-            album.forEach(System.out::println);
+
+
+            File albumFile = new File("Data.txt");
+            Scanner fileScaner = new Scanner(albumFile);
+            ArrayList<Albums> albumsArrayList = new ArrayList<>();
+            while(fileScaner.hasNext()){
+                Albums album = new Albums();
+                album.artist = fileScaner.nextLine();
+                album.album = fileScaner.nextLine();
+                album.songsNumber = Integer.parseInt(fileScaner.nextLine());
+                album.year = Integer.parseInt(fileScaner.nextLine());
+                album.downloadNumber = Long.parseLong(fileScaner.nextLine());
+                if(fileScaner.hasNext()){
+                    fileScaner.nextLine();
+                }
+                albumsArrayList.add(album);
+            }
+            for(Albums albums : albumsArrayList){
+                System.out.println(albums.toString());
+            }
+
+
             OutputArrayToFile("output.txt", ChangeArrayToByteArray(numbersContainer));
         } catch (IOException e) {
             throw new RuntimeException(e);
