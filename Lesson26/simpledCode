@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    // More efficient byte array conversion using direct byte operations
+    public static ArrayList<Byte> changeArrayToByteArray(ArrayList<Integer> numbers) {
+        ArrayList<Byte> bytes = new ArrayList<>();
+        for (Integer num : numbers) {
+            // Convert integer to bytes directly
+            String numStr = String.valueOf(num);
+            for (char c : numStr.toCharArray()) {
+                bytes.add((byte) c);
+            }
+        }
+        return bytes;
+    }
+
+    // Using try-with-resources for automatic resource management
+    public static ArrayList<Integer> getIntArrayFromFile(String filePath) throws IOException {
+        ArrayList<Integer> list = new ArrayList<>();
+        try (FileInputStream fis = new FileInputStream(filePath);
+             BufferedInputStream bis = new BufferedInputStream(fis);
+             Scanner scanner = new Scanner(bis)) {
+            while (scanner.hasNextInt()) {
+                list.add(scanner.nextInt());
+            }
+        }
+        return list;
+    }
+
+    // Optimized output with better formatting logic and try-with-resources
+    public static void outputArrayToFile(String outputFilePath, ArrayList<Byte> byteArrayList)
+            throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(outputFilePath)) {
+            for (int i = 0; i < byteArrayList.size(); i++) {
+                fos.write(byteArrayList.get(i));
+
+                // Simplified formatting logic
+                int position = i + 1;
+                if (position >= 5 && position % 5 == 0) {
+                    fos.write(position % 10 == 0 ? (byte)'\n' : (byte)' ');
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Process numbers in a single pass
+            ArrayList<Integer> numbers = getIntArrayFromFile("input.txt");
+            for (int i = 0; i < numbers.size(); i++) {
+                numbers.set(i, numbers.get(i) + (i % 2 == 0 ? 1 : 2));
+            }
+            outputArrayToFile("output.txt", changeArrayToByteArray(numbers));
+        } catch (IOException e) {
+            throw new RuntimeException("Error processing files", e);
+        }
+    }
+}
